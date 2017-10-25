@@ -8,6 +8,5 @@ exports.handler = function(event, context) {
 
     var body = JSON.parse(event.body);
 
-    callback(null, { statusCode: 200, body: JSON.stringify(body) });
-
+    callback(null, { statusCode: 200, body: body });
 }
