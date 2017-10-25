@@ -4,4 +4,10 @@ const awsServerlessExpress = require('aws-serverless-express')
 const app = require('./app')
 const server = awsServerlessExpress.createServer(app)
 
-exports.handler = (event, context) => awsServerlessExpress.proxy(server, event, context);
+exports.handler = function(event, context) {
+
+    var body = JSON.parse(event.body);
+
+    callback(null, { statusCode: 200, body: JSON.stringify(body) });
+
+}
