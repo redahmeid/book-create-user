@@ -8,6 +8,8 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
+  console.log(req.body.id);
+  res.statusCode = 201;
   res.send({
     "Output": "Hello World!"
   });
