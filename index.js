@@ -20,15 +20,16 @@ exports.handler = function(event, context,callback) {
             result.records.forEach(function(record) {
                 response = record;
                 console.log(record)
+                callback(null, { statusCode: 201, body: JSON.stringify(response) });
             });
   
             session.close();
         })
         .catch(function(error) {
-            console.log(error);
+            callback(null, { statusCode: 500, body: {"error":"error"} });
         });
   
 
-    callback(null, { statusCode: 201, body: JSON.stringify(response) });
+    
 
 }
