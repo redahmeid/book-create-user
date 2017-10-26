@@ -6,7 +6,7 @@ var driver = neo4j.driver("bolt://hobby-djjfigaajbbfgbkeaecpfepl.dbs.graphenedb.
 
 exports.handler = function(event, context,callback) {
 
-    var body = JSON.parse(event.body);
+  var body = JSON.parse(event.body);
     console.log(body);
 
     var session = driver.session();
@@ -16,7 +16,7 @@ exports.handler = function(event, context,callback) {
     var response;
     session
         .run("CREATE (n:User {name:'"+name+"', email:'"+email+"'}) RETURN n.name")
-        .then(function(result) {
+        .then(function(result){
             result.records.forEach(function(record) {
                 response = record;
                 console.log(record)
@@ -28,8 +28,4 @@ exports.handler = function(event, context,callback) {
         .catch(function(error) {
             callback(null, { statusCode: 500, body: {"error":"error"} });
         });
-  
-
-    
-
 }
