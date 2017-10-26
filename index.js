@@ -16,20 +16,20 @@ exports.handler = function(event, context, callback) {
     var response;
     session
         .run("CREATE (n:User {name:'"+name+"', email:'"+email+"'}) RETURN n.id")
-        .then(function(result){
-            result.records.forEach(function(record) {
-                response = record.get("id");
-                console.log(record.get("id")) 
-            });
-            console.log("finished")
-            
-            callback(null, { statusCode: 201, body: JSON.stringify(response) });
-            session.close();
-            
-        })
-        .catch(function(error) {
-            callback(null, { statusCode: 500, body: {"error":"error"} });
-        });
+        .subscribe({
+            onNext: function (record) {
+              console.log(record.get('id'));
+            },
+            onCompleted: function () {
+             callback(null, { statusCode: 201, body: ""});
+              session.close();
+            },
+            onError: function (error) {
+              console.log(error);
+              callback(null, { statusCode: 500, body: ""});
+            }
+          });
+      
 
         console.log("here 1")
         
