@@ -18,7 +18,7 @@ exports.handler = function(event, context, callback) {
         .run("CREATE (n:User {name:'"+name+"', email:'"+email+"'}) RETURN n.id")
         .subscribe({
             onNext: function (record) {
-              console.log(record.get('id'));
+              console.log(record.get('n.id'));
             },
             onCompleted: function () {
              callback(null, { statusCode: 201, body: ""});
@@ -28,9 +28,5 @@ exports.handler = function(event, context, callback) {
               console.log(error);
               callback(null, { statusCode: 500, body: ""});
             }
-          });
-      
-
-        console.log("here 1")
-        
+          });  
 }
