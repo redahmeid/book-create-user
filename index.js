@@ -15,17 +15,19 @@ exports.handler = function(event, context,callback) {
     var email = body.email;
     var response;
     session
-        .run("CREATE (n:User {name:'"+name+"', email:'"+email+"'}) RETURN n.name")
+        .run("CREATE (n:User {name:'"+name+"', email:'"+email+"'}) RETURN n")
         .then(function(result){
             result.records.forEach(function(record) {
                 response = record;
-                console.log(record)
-                callback(null, { statusCode: 201, body: JSON.stringify(response) });
+                console.log(record) 
             });
-  
+            console.log("finished")
             session.close();
+            callback(null, { statusCode: 201, body: JSON.stringify(response) });
         })
         .catch(function(error) {
             callback(null, { statusCode: 500, body: {"error":"error"} });
         });
+
+        console.log("here 1")
 }
