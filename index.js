@@ -1,6 +1,5 @@
 'use strict';
 
-const awsServerlessExpress = require('aws-serverless-express')
 const app = require('./app')
 var neo4j = require('neo4j-driver').v1;
 var driver = neo4j.driver("bolt://hobby-djjfigaajbbfgbkeaecpfepl.dbs.graphenedb.com:24786", neo4j.auth.basic("openlight", "b.6GGBQb5zVyyC.AGcbmyfCH0dLlifb"));
